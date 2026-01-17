@@ -84,7 +84,7 @@ def predict(input_data: TLSInput):
     anomaly_score = -iforest.decision_function(features_scaled)[0]
 
     # Threshold (same logic as training)
-    threshold = 0.95
+    threshold = np.percentile(scores[y == 0], 95)
 
     prediction = "MITM_ATTACK" if anomaly_score > threshold else "NORMAL"
 
